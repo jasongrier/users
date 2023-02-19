@@ -12,8 +12,15 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
+    'arrow-parens': 0,
+    'function-paren-newline': 0,
+    'implicit-arrow-linebreak': 0,
+    'import/prefer-default-export': 0,
+    indent: 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-shadow': 0,
+    semi: 0,
   },
   overrides: [
     {
@@ -26,4 +33,4 @@ module.exports = {
       },
     },
   ],
-};
+}

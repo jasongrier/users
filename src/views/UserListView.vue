@@ -40,7 +40,8 @@ onMounted(() => {
 }
 
 .user-list-view__list {
+  position: relative;
   flex-grow: 1;
-  overflow: scroll;
+  overflow: hidden;
 }
 </style>

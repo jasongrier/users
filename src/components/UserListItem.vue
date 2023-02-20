@@ -1,16 +1,14 @@
 <script setup>
 import { computed, defineProps, toRefs } from 'vue'
 import { useStore } from 'vuex'
-import { User } from '../store/users'
 
 const props = defineProps({
   user: {},
 })
 
 const { user } = toRefs(props)
-
 const store = useStore()
-
+const searchText = computed(() => store.getters['users/searchText'])
 const selected = computed(() =>
   store.getters['users/usersSelectedIDs'].includes(user.value.id),
 )

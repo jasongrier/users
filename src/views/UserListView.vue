@@ -28,7 +28,7 @@ onMounted(() => {
   height: calc(100vh - calc(var(--standard-spacing) * 2));
   padding: var(--standard-spacing);
   overflow: hidden;
-  background-color: green;
+  background-color: #fff;
 
   display: flex;
   flex-direction: column;
@@ -36,13 +36,11 @@ onMounted(() => {
 
 .user-list-view__search {
   height: 50px;
-  margin-bottom: var(--standard-spacing);
-  background-color: red;
+  margin-bottom: calc(var(--standard-spacing) * 3);
 }
 
 .user-list-view__list {
   flex-grow: 1;
   overflow: scroll;
-  background-color: orange;
 }
 </style>

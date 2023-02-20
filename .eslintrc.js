@@ -12,10 +12,12 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
+    '@typescript-eslint/ban-ts-comment': 0,
     'arrow-parens': 0,
     'function-paren-newline': 0,
     'implicit-arrow-linebreak': 0,
     'import/prefer-default-export': 0,
+    'newline-per-chained-call': 0,
     indent: 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

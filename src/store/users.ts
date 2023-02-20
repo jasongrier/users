@@ -1,19 +1,20 @@
 import { ActionContext } from 'vuex'
 import { fetchUsers } from '@/api'
 
-interface UserName {
+export interface UserName {
   first: string
   last: UserName
 }
 
-interface User {
+export interface User {
   id: string
   name: UserName
 }
 
-interface State {
-  users: User[]
+export interface State {
   searchText: string
+  users: User[]
+  usersSelectedIDs: string[]
 }
 
 type Context = ActionContext<State, object>
@@ -35,8 +36,9 @@ const getUsersFiltered = (searchText: string, users: User[]) => {
 export const users = {
   namespaced: true,
   state: {
-    users: [],
     searchText: '',
+    users: [],
+    usersSelectedIDs: [],
   } as State,
   getters: {
     users({ users }: State) {
@@ -44,6 +46,9 @@ export const users = {
     },
     usersFiltered({ searchText, users }: State) {
       return searchText.length > 2 ? getUsersFiltered(searchText, users) : users
+    },
+    usersSelectedIDs({ usersSelectedIDs }: State) {
+      return usersSelectedIDs
     },
     searchText({ searchText }: State) {
       return searchText
@@ -55,6 +60,16 @@ export const users = {
     },
     setUsers(state: State, users: User[]) {
       state.users = users
+    },
+    toggleSelected(state: State, id: string) {
+      if (state.usersSelectedIDs.includes(id)) {
+        const idx = state.usersSelectedIDs.findIndex(
+          selectedID => selectedID === id,
+        )
+        state.usersSelectedIDs.splice(idx)
+      } else {
+        state.usersSelectedIDs.push(id)
+      }
     },
   },
   actions: {
@@ -68,6 +83,9 @@ export const users = {
     },
     search({ commit }: Context, searchText: string) {
       commit('setSearchText', searchText)
+    },
+    toggleSelected({ commit }: Context, id: string) {
+      commit('toggleSelected', id)
     },
   },
   modules: {},

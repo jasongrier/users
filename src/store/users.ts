@@ -25,7 +25,7 @@ const getUsersFiltered = (searchText: string, users: User[]) => {
   const collection = filterCache[searchText] ?? users
 
   const usersFiltered = collection.filter(({ name }) =>
-    (name.first + name.last).toLowerCase().includes(searchText),
+    `${name.first} ${name.last}`.toLowerCase().includes(searchText),
   )
 
   filterCache[searchText] = usersFiltered
@@ -66,7 +66,7 @@ export const users = {
         const idx = state.usersSelectedIDs.findIndex(
           selectedID => selectedID === id,
         )
-        state.usersSelectedIDs.splice(idx)
+        state.usersSelectedIDs.splice(idx, 1)
       } else {
         state.usersSelectedIDs.push(id)
       }

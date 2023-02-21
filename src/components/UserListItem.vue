@@ -133,6 +133,7 @@ const toggle = () => store.dispatch('users/toggleSelected', user.value.id)
   color: #6b81f3;
   cursor: pointer;
   background-color: transparent;
+  pointer-events: all;
 }
 
 .user-list__select-toggle:active,

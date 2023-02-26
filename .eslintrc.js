@@ -21,6 +21,7 @@ module.exports = {
     'no-confusing-arrow': 0,
     'object-curly-newline': 0,
     'operator-linebreak': 0,
+    'vuejs-accessibility/heading-has-content': 0,
     indent: 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

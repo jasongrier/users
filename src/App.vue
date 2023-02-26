@@ -7,11 +7,6 @@
 </template>
 
 <style>
-:root {
-  --standard-spacing: 10px;
-  --standard-radius: 8px;
-}
-
 html,
 body {
   margin: 0;

@@ -25,6 +25,7 @@ const getUsersFiltered = (searchText: string, users: User[]) => {
   const collection = filterCache[searchText] ?? users
 
   const usersFiltered = collection.filter(({ name }) =>
+    // TODO: Search in other fields on user as well
     `${name.first} ${name.last}`.toLowerCase().includes(searchText),
   )
 
@@ -45,7 +46,7 @@ export const users = {
       return users
     },
     usersFiltered({ searchText, users }: State) {
-      return searchText.length > 2 ? getUsersFiltered(searchText, users) : users
+      return searchText.length ? getUsersFiltered(searchText, users) : users
     },
     usersSelectedIDs({ usersSelectedIDs }: State) {
       return usersSelectedIDs
@@ -55,11 +56,12 @@ export const users = {
     },
   },
   mutations: {
+    appendUsers(state: State, users: User[]) {
+      console.log('Appending users...')
+      state.users = state.users.concat(users)
+    },
     setSearchText(state: State, searchText: string) {
       state.searchText = searchText
-    },
-    setUsers(state: State, users: User[]) {
-      state.users = users
     },
     toggleSelected(state: State, id: string) {
       if (state.usersSelectedIDs.includes(id)) {
@@ -74,10 +76,12 @@ export const users = {
   },
   actions: {
     async fetch({ commit }: Context) {
+      console.log('Fetching from local DB...')
+
       try {
-        commit('setUsers', await fetchUsers())
+        commit('appendUsers', await fetchUsers())
       } catch (err) {
-        // dispatch error notification...
+        // TODO: dispatch error notification...
         console.log(err)
       }
     },

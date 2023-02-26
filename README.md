@@ -1,34 +1,10 @@
-# users
+# TODO
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Use ranges to pull a smaller initial batch from IndexedDB
+- Make custom scrollbar handle draggable
+- Highlight should be case-insensitive
+- Apply highlighting to address fields
+- Search in address fields as well
+- Dispatch error notifications in catch blocks, rather than console.log
+- Loading animation
+- Write tests

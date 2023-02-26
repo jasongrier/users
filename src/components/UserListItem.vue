@@ -1,9 +1,10 @@
 <script setup>
 import { computed, defineProps, toRefs } from 'vue'
 import { useStore } from 'vuex'
+import HighlightText from '@/components/HighlightText.vue'
 
 const props = defineProps({
-  user: {},
+  user: Object,
 })
 
 const { user } = toRefs(props)
@@ -17,18 +18,22 @@ const toggle = () => store.dispatch('users/toggleSelected', user.value.id)
 </script>
 
 <template>
-  <li :class="`user-list__item${selected ? ' user-list__item--selected' : ''}`">
+  <div
+    :class="`user-list__item${selected ? ' user-list__item--selected' : ''}`"
+  >
     <div class="user-list__image">
       <img :src="user.picture" :alt="`${user.name.first} ${user.name.last}`" />
     </div>
     <div class="user-list__card">
       <div class="user-list__email">{{ user.email }}</div>
       <h3>
-        <!-- <Highlight :text="'Al'"> -->
-        {{ user.name.first }} {{ user.name.last }}
-        <!-- </Highlight> -->
+        <HighlightText
+          :highlight="searchText"
+          :text="`${user.name.first} ${user.name.last}`"
+        />
       </h3>
       <p>
+        <!-- TODO: Apply HighlightText to these fields as well -->
         Registered: {{ user.registered }}<br />
         Address: {{ user.address }}<br />
         Country: {{ user.country }}
@@ -39,12 +44,13 @@ const toggle = () => store.dispatch('users/toggleSelected', user.value.id)
         </button>
       </div>
     </div>
-  </li>
+  </div>
 </template>
 
-<style scoped>
+<style>
 .user-list__item {
   position: relative;
+  width: calc(100vw - 60px);
   height: 160px;
   margin-bottom: 16px;
   background-color: #f9f9f9;

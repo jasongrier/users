@@ -14,13 +14,16 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, nextTick } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
 const searchText = computed(() => store.getters['users/searchText'])
 const setSearchText = evt => {
-  store.dispatch('users/search', evt.currentTarget.value)
+  const searchText = evt.currentTarget.value
+  nextTick(() => {
+    store.dispatch('users/search', searchText)
+  })
 }
 </script>
 
@@ -29,7 +32,7 @@ const setSearchText = evt => {
   width: 100%;
   height: 50px;
   background-color: #eee;
-  border-radius: var(--standard-radius);
+  border-radius: 8px;
 
   display: flex;
 }

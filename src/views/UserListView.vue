@@ -7,7 +7,17 @@ import UserSearch from '@/components/UserSearch.vue'
 const store = useStore()
 
 onMounted(() => {
-  store.dispatch('users/fetch')
+  const usersWorker = new Worker('/workers/users.worker.js')
+
+  usersWorker.onmessage = ({ data }) => {
+    console.log('Loading...')
+
+    if (data === 'OK') {
+      console.log('Done')
+
+      store.dispatch('users/fetch')
+    }
+  }
 })
 </script>
 
@@ -17,6 +27,7 @@ onMounted(() => {
       <UserSearch />
     </div>
     <div class="user-list-view__list">
+      <!-- TODO: Loading animation -->
       <UserList />
     </div>
   </div>
@@ -24,11 +35,10 @@ onMounted(() => {
 
 <style scoped>
 .user-list-view {
-  width: calc(100vw - calc(var(--standard-spacing) * 2));
-  height: calc(100vh - calc(var(--standard-spacing) * 2));
-  padding: var(--standard-spacing);
+  width: calc(100vw - 20px);
+  height: calc(100vh - 20px);
+  padding: 10px;
   overflow: hidden;
-  background-color: #fff;
 
   display: flex;
   flex-direction: column;
@@ -36,7 +46,7 @@ onMounted(() => {
 
 .user-list-view__search {
   height: 50px;
-  margin-bottom: calc(var(--standard-spacing) * 3);
+  margin-bottom: 30px;
 }
 
 .user-list-view__list {
